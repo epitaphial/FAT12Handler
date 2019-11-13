@@ -7,8 +7,8 @@ void init_FAT12_Boot_Sec(PFAT12BS pfat12bs)
     memset(pfat12bs,0,sizeof(FAT12BS));
 
     //OEMNAME
-    char tmp_oem[8] = {'C','u','r','l','e','d'};
-    strncpy(pfat12bs->BS_OEMName,tmp_oem,6);
+    char tmp_oem[8] = {'C','u','r','l','e','d',' ',' '};
+    strncpy(pfat12bs->BS_OEMName,tmp_oem,8);
 
     pfat12bs->BPB_BytesPerSec = 512;
     pfat12bs->BPB_SecPerClus = 1;
@@ -28,12 +28,12 @@ void init_FAT12_Boot_Sec(PFAT12BS pfat12bs)
     pfat12bs->BS_VolID = 0;
 
     //vollab
-    char tmp_vol[11] = {'D','r','i','v','e','A'};
-    strncpy(pfat12bs->BS_VolLab,tmp_vol,6);
+    char tmp_vol[11] = {'D','r','i','v','e','A',' ',' ',' ',' ',' '};
+    strncpy(pfat12bs->BS_VolLab,tmp_vol,11);
 
     //type
-    char tmp_type[8] = {'F','A','T','1','2'};
-    strncpy(pfat12bs->BS_FileSysType,tmp_type,5);
+    char tmp_type[8] = {'F','A','T','1','2',' ',' ',' '};
+    strncpy(pfat12bs->BS_FileSysType,tmp_type,8);
 
     pfat12bs->EndSig = 0xAA55;
 }
