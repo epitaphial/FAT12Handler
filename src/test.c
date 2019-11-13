@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include "fileopr.h"
+#include "FATshell.h"
 
 int main()
 {
+    /*
     //create img test
     int status = CreateEPTfile("test.img");
     if (status == -1)
@@ -15,8 +17,10 @@ int main()
     if (status == -1)
         printf("wrong");
     else
-        printf("success");    
-    return 0;
+        printf("success");  
+    */
 
-    
+    //shell test
+    start_shell();
+    return 0;
 }

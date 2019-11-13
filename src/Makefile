@@ -1,4 +1,4 @@
-SOURCE = fileopr.o bootsec.o
+SOURCE = fileopr.o bootsec.o FATshell.o FATio.o
 
 CC = gcc
 
@@ -13,6 +13,12 @@ fileopr.o : fileopr.h fileopr.c
 
 bootsec.o : bootsec.h bootsec.c
 	$(CC) -c bootsec.c
+
+FATshell.o : FATshell.h FATshell.c
+	$(CC) -c FATshell.c
+
+FATio.o : FATio.h FATio.c
+	$(CC) -c FATio.c
 
 .PHONY : clean
 clean :

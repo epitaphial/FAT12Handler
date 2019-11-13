@@ -6,6 +6,10 @@ void init_FAT12_Boot_Sec(PFAT12BS pfat12bs)
 {
     memset(pfat12bs,0,sizeof(FAT12BS));
 
+    //filled with nop(0x90)
+    for (int i = 0; i < 3; i++)
+        pfat12bs->BS_jmpBoot[i] = 0x90;
+
     //OEMNAME
     char tmp_oem[8] = {'C','u','r','l','e','d',' ',' '};
     strncpy(pfat12bs->BS_OEMName,tmp_oem,8);
