@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "malloc.h": "c",
-        "string.h": "c",
-        "fileopr.h": "c"
-    }
-}
