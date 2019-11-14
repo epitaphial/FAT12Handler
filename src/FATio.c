@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include <FATio.h>
+
+#include "FATio.h"
 
 int gets_LR(char *buffer,int size)
 {
@@ -24,4 +25,15 @@ void print_Hello()
     printf("3.load FAT12 floppy and manage.  \n");
     printf("0.exit.                          \n");
     printf("_________________________________\n");
+}
+
+void print_helper()
+{
+    printf("help             show help info.\n");
+    printf("info             show floppy information.\n");
+    printf("ls               list the file.\n");
+    printf("rm               delete file.\n");
+    printf("write            write in file.\n");
+    printf("quit             quit shell.\n\n");
+    return;
 }

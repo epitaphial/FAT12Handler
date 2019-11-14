@@ -3,8 +3,6 @@
 
 #define FLOPPYBYTE 2*80*18*512
 
-#include <stdio.h>
-
 #pragma pack(push)
 #pragma pack (1)
 

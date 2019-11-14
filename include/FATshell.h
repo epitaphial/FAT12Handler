@@ -4,7 +4,14 @@
 
 void start_shell();
 void manage_shell(char *floppy_name);
-void print_helper();
 
+//-ls
+void command_ls(FILE *fp);
+
+//-help
+void command_help();
+
+//-info
+void command_info(FILE *fp);
 
 #endif

@@ -1,5 +1,7 @@
 #include <string.h>
-#include <bootsec.h>
+#include <stdio.h>
+
+#include "bootsec.h"
 
 
 void init_FAT12_Boot_Sec(PFAT12BS pfat12bs)

@@ -29,6 +29,9 @@ $(OBJPATH)FATio.o : $(HDPATH)FATio.h $(SRCPATH)FATio.c
 $(OBJPATH)rootdir.o : $(HDPATH)rootdir.h $(SRCPATH)rootdir.c
 	$(CC) $(CFLAGS) -c $(SRCPATH)rootdir.c -o $@
 
+$(OBJPATH)FATmanage.o : $(HDPATH)FATmanage.h $(SRCPATH)FATmanage.c
+	$(CC) $(CFLAGS) -c $(SRCPATH)FATmanage.c -o $@
+
 .PHONY : clean
 clean :
 	rm build/*

@@ -3,11 +3,11 @@
 #include <io.h>
 #include <string.h>
 
-
-#include <FATshell.h>
-#include <fileopr.h>
-#include <FATio.h>
-#include <bootsec.h>
+#include "FATshell.h"
+#include "fileopr.h"
+#include "FATio.h"
+#include "bootsec.h"
+#include "FATmanage.h"
 
 void start_shell()
 {
@@ -131,9 +131,11 @@ void manage_shell(char *floppy_name)
             int Commandlen;
             Commandlen = gets_LR(Commandbuf,30);
             fflush(stdin);
-            if(!strncmp(Commandbuf,"help",Commandlen))
+            if(Commandlen == 0)
+                continue;
+            else if(!strncmp(Commandbuf,"help",Commandlen))
             {
-                print_helper();
+                command_help();
             }
             else if(!strncmp(Commandbuf,"quit",Commandlen))
             {
@@ -141,18 +143,63 @@ void manage_shell(char *floppy_name)
                 fclose(fp);
                 exit(-1);
             }
+            else if (!strncmp(Commandbuf,"info",Commandlen))
+            {
+                command_info(fp);
+            }
+            else if (!strncmp(Commandbuf,"ls",Commandlen))
+            {
+                command_ls(fp);
+            }
         }
         fclose(fp);
     }
 }
 
 
-void print_helper()
+/*command*/
+
+void command_info(FILE *fp)
 {
-    printf("help             show help info\n");
-    printf("ls               list the file\n");
-    printf("rm               delete file\n");
-    printf("write            write in file\n");
-    printf("quit             quit shell\n");
+    fseek(fp,0,SEEK_SET);
+    FAT12BS fat12bs;
+    fread(&fat12bs,sizeof(FAT12BS),1,fp);
+
+    //OEMName
+    printf("OEMName:");
+    for (int i = 0; i < 8; i++)
+    {
+        printf("%c",fat12bs.BS_OEMName[i]);
+    }
+    printf("\n");
+    
+    //Byte per section
+    printf("BytesPerSec:%d\n",fat12bs.BPB_BytesPerSec);
+    //Section Per Clus
+    printf("SecPerClus:%d\n",fat12bs.BPB_SecPerClus);
+    //num of FAT table
+    printf("NumFATs:%d\n",fat12bs.BPB_NumFATs);
+    //size of rootdir
+    printf("RootEntCnt:%d\n",fat12bs.BPB_RootEntCnt);
+    //FileSysType
+    printf("FileSysType:");
+    for (int i = 0; i < 8; i++)
+    {
+        printf("%c",fat12bs.BS_FileSysType[i]);
+    }
+    printf("\n\n");
+}
+
+void command_ls(FILE *fp)
+{
+    FAT12TABLE fat12table;
+    ReadFATtable(fp,&fat12table);
+    return;
+}
+
+
+void command_help()
+{
+    print_helper();
     return;
 }

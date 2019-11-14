@@ -22,5 +22,4 @@ int main()
 
     //shell test
     start_shell();
-    return 0;
 }
