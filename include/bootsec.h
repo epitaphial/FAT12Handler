@@ -1,6 +1,8 @@
 #ifndef BOOTSEC_H
 #define BOOTSEC_H
 
+#define FLOPPYBYTE 2*80*18*512
+
 #include <stdio.h>
 
 #pragma pack(push)

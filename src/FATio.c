@@ -3,7 +3,7 @@
 
 int gets_LR(char *buffer,int size)
 {
-    int scanf_count,status;
+    int scanf_count;
     for (scanf_count = 0; scanf_count < size; scanf_count++)
     {
         scanf("%c",buffer+scanf_count);
