@@ -7,13 +7,13 @@
 
 A little Tool to make ,read and write FAT12,written by C.
 
-![FAT12Handler](![FAT12Handler](./res/FAT12Handler))
+![MUBNmd.gif](https://s2.ax1x.com/2019/11/15/MUBNmd.gif)
 
 ## HOW TO USE
 
 `make`
 
-the release file is in `\/build`,just run it.
+the release file is in `/build/`,just run it.
 
 ## TODO
 
