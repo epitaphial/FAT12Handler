@@ -1,6 +1,9 @@
 #include <stdio.h>
-#include <fileopr.h>
-#include <FATshell.h>
+
+#include "common.h"
+#include "fileopr.h"
+#include "FATshell.h"
+#include "rootdir.h"
 
 int main()
 {
@@ -22,4 +25,10 @@ int main()
 
     //shell test
     start_shell();
+
+    //list test
+    /*FILE *fp = fopen("Floppy.img","rb+");
+    FAT12DIRENTRY fat12dir[224];
+    getDirInfo(fp,fat12dir);*/
+    return 0;
 }

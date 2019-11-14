@@ -23,18 +23,18 @@ void print_Hello()
     printf("please choose:                   \n");
     printf("1.create a empty FAT12 floppy.   \n");
     printf("2.write in boot.bin(512byte).    \n");
-    printf("3.load FAT12 floppy and manage.  \n");
+    printf("3.FAT12 manage shell.            \n");
     printf("0.exit.                          \n");
     printf("_________________________________\n");
 }
 
 void print_helper()
 {
-    printf("help             show help info.\n");
-    printf("info             show floppy information.\n");
-    printf("ls               list the file.\n");
-    printf("rm               delete file.\n");
-    printf("write            write in file.\n");
-    printf("quit             quit shell.\n\n");
+    printf("[help]             show help info.\n");
+    printf("[info]             show floppy information.\n");
+    printf("[ls]               list the file.\n");
+    printf("[rm]               delete file.\n");
+    printf("[write]            write in file.\n");
+    printf("[quit]             exit shell.\n\n");
     return;
 }

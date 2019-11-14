@@ -9,6 +9,7 @@
 #include "FATio.h"
 #include "bootsec.h"
 #include "FATmanage.h"
+#include "rootdir.h"
 
 void start_shell()
 {
@@ -153,6 +154,11 @@ void manage_shell(char *floppy_name)
             {
                 command_ls(fp);
             }
+            else
+            {
+                printf("No Instruction [%s],type [help] to get assistance.\n",Commandbuf);
+            }
+            
         }
         fclose(fp);
     }
@@ -194,8 +200,9 @@ void command_info(FILE *fp)
 
 void command_ls(FILE *fp)
 {
-    FAT12TABLE fat12table;
-    ReadFATtable(fp,&fat12table);
+    FAT12DIRENTRY fat12dir[224];
+    getDirInfo(fp,fat12dir);
+    lsDirInfo(fat12dir);
     return;
 }
 

@@ -35,5 +35,6 @@ int ReadFATtable(FILE *fp,PFAT12TABLE pfat12table)
 
 int WriteFATtable(FILE *fp,PFAT12TABLE pfat12table)
 {
+    
     return 0;
 }
