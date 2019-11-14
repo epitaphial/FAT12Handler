@@ -1,7 +1,7 @@
 #include <stdlib.h>
-#include "FATshell.h"
-#include "fileopr.h"
-#include "FATio.h"
+#include <FATshell.h>
+#include <fileopr.h>
+#include <FATio.h>
 
 void start_shell()
 {
@@ -45,11 +45,11 @@ void start_shell()
         case '2':
         {
             fflush(stdin);
-            char bufBoot[10],bufLoader[10];
-            printf("Please input the name of the floppy:\n");
-            int bufNameLen = gets_LR(bufBoot,10);
+            char bufBoot[100],bufLoader[100];
+            printf("Please input the path of the floppy:\n");
+            int bufNameLen = gets_LR(bufBoot,100);
             printf("Please input the name of the booter:[boot.bin]\n");
-            int loadNameLen = gets_LR(bufLoader,10);
+            int loadNameLen = gets_LR(bufLoader,100);
             int status;
             if(bufNameLen != 0 && loadNameLen != 0)
                 status = InsertBootbin(bufBoot,bufLoader);

@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "fileopr.h"
-#include "bootsec.h"
+#include <fileopr.h>
+#include <bootsec.h>
 
 int CreateEPTfile(char *szFileName){
     FILE *fp = fopen(szFileName,"wb+");
