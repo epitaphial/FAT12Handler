@@ -6,7 +6,7 @@
 
 //part for FAT12
 
-struct FAT12RootDir_entry
+typedef struct FAT12RootDir_entry
 {
     char DIR_Name[11];
     char DIR_Attr;
@@ -15,7 +15,7 @@ struct FAT12RootDir_entry
     short DIR_WrtDate;
     short DIR_FstClus;
     int DIR_FileSize;
-};
+}FAT12DIRENTRY,PFAT12DIRENTRY;
 
 #pragma pack(pop)
 

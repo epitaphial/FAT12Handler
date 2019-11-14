@@ -3,6 +3,7 @@
 #include <io.h>
 #include <string.h>
 
+#include "common.h"
 #include "FATshell.h"
 #include "fileopr.h"
 #include "FATio.h"
@@ -130,24 +131,25 @@ void manage_shell(char *floppy_name)
             char Commandbuf[30];
             int Commandlen;
             Commandlen = gets_LR(Commandbuf,30);
+            
             fflush(stdin);
             if(Commandlen == 0)
                 continue;
-            else if(!strncmp(Commandbuf,"help",Commandlen))
+            else if(!strncmp(Commandbuf,"help",Commandlen) && Commandlen == 4)
             {
                 command_help();
             }
-            else if(!strncmp(Commandbuf,"quit",Commandlen))
+            else if(!strncmp(Commandbuf,"quit",Commandlen) && Commandlen == 4)
             {
                 printf("Bye!\n");
                 fclose(fp);
                 exit(-1);
             }
-            else if (!strncmp(Commandbuf,"info",Commandlen))
+            else if (!strncmp(Commandbuf,"info",Commandlen) && Commandlen == 4)
             {
                 command_info(fp);
             }
-            else if (!strncmp(Commandbuf,"ls",Commandlen))
+            else if (!strncmp(Commandbuf,"ls",Commandlen) && Commandlen == 2)
             {
                 command_ls(fp);
             }

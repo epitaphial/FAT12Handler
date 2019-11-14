@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+#include "common.h"
 #include "FATio.h"
 
 int gets_LR(char *buffer,int size)

@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 
+#include "common.h"
 #include "bootsec.h"
 
 

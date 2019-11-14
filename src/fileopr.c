@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "common.h"
 #include "fileopr.h"
 #include "bootsec.h"
 

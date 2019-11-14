@@ -10,10 +10,10 @@
 typedef struct FAT12_FAT
 {
     //the first two byte cant be used!
-    char FAT_cluster[4608];
+    UCHAR FAT_cluster[FATSIZE];
 
     //a bitset,tell if a cluster is unused. 4608/1.5/32 = 96
-    int FAT_bit[96];
+    UINT FAT_bit[96];
 }FAT12TABLE,*PFAT12TABLE;
 
 //read FATtable from img
@@ -27,6 +27,7 @@ int getFreeOffset(PFAT12TABLE pfat12table);
 
 //flag a free cluster to be used
 void setUsedbit(int offset);
+
 
 #pragma pack(pop)
 
