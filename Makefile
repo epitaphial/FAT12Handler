@@ -1,5 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -I $(HDPATH)
+DBGFLAGS = -g
 
 ROOTPATH = .
 HDPATH = $(ROOTPATH)/include/
@@ -12,7 +13,7 @@ SRCPAT = $(wildcard $(SRCPATH)*.c)
 OBJPAT = $(patsubst %.c,$(OBJPATH)%.o,$(notdir $(SRCPAT)))
 
 test : $(OBJPAT) $(TSTFILE)
-	$(CC) $(CFLAGS) -o $(BDPATH)test $(OBJPAT) $(TSTFILE)
+	$(CC) $(CFLAGS) $(DBGFLAGS) -o $(BDPATH)test $(OBJPAT) $(TSTFILE)
 
 $(OBJPATH)fileopr.o : $(HDPATH)fileopr.h $(SRCPATH)fileopr.c
 	$(CC) $(CFLAGS) -c $(SRCPATH)fileopr.c -o $@

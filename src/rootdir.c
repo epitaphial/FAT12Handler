@@ -7,10 +7,10 @@
 
 int getDirInfo(FILE *fp,PFAT12DIRENTRY fat12dir)
 {
-    fseek(fp,19*512,SEEK_SET);
+    fseek(fp,(long)(19*512),SEEK_SET);
     for (int i = 0; i < 224; i++)
     {
-        fread(fat12dir+i,32,1,fp);
+        fread(&fat12dir[i],32,1,fp);
     }    
     return 0;
 }
@@ -25,7 +25,8 @@ int lsDirInfo(PFAT12DIRENTRY fat12dir)
         memset(tmpSpace,0,32);
         if(!memcmp(tmpSpace,&fat12dir[item],32))
             break;
-        
+        free(tmpSpace);
+        tmpSpace = NULL;
         //file type
         if(fat12dir[item].DIR_Name[0]<0)
         {

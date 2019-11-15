@@ -1,6 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
+#if(_WIN32)
 #include <io.h>
+#elif(__linux__)
+#include<unistd.h>
+#endif
 #include <string.h>
 
 #include "common.h"
@@ -17,21 +21,31 @@ void start_shell()
     while (1)
     {
         printf(">>>");
-        char getKey = getchar();
-        switch (getKey)
+        char *bufIns = malloc(100);
+        gets_LR(bufIns,100);
+        if(bufIns[1] != '\0')
+        {
+            fflush(stdin);
+            printf("Invalid Input!\n");
+            free(bufIns);
+            bufIns = NULL;
+            continue;
+        }
+        switch (bufIns[0])
         {
         case '0':
         {
             fflush(stdin);
+            free(bufIns);
+            bufIns = NULL;
             exit(-1);
-            break;
         }
         case '1':
         {
             fflush(stdin);
             printf("Please input the name of the floppy:[a.img]\n");
-            char buf[10];
-            int fileNameLen = gets_LR(buf,10);
+            char *buf = malloc(100);
+            int fileNameLen = gets_LR(buf,100);
             int status;
             if(fileNameLen == 0)
                 status = CreateEPTfile("a.img");
@@ -42,18 +56,23 @@ void start_shell()
             if (status == -1)
             {
                 printf("Fail to create.\n");
+                free(buf);
+                buf = NULL;
                 break;
             }
             else
             {    
-                printf("Success to create.\n");          
+                printf("Success to create.\n");
+                free(buf);
+                buf = NULL;        
                 break;
             }
         }
         case '2':
         {
             fflush(stdin);
-            char bufBoot[100],bufLoader[100];
+            char *bufBoot = malloc(100);
+            char *bufLoader = malloc(100);
             printf("Please input the path of the floppy:\n");
             int bufNameLen = gets_LR(bufBoot,100);
             printf("Please input the name of the booter:[boot.bin]\n");
@@ -64,6 +83,10 @@ void start_shell()
             else if(bufNameLen == 0)
             {
                 printf("Floppy name cant be empty!\n");
+                free(bufBoot);
+                free(bufLoader);
+                bufBoot = NULL;
+                bufLoader = NULL;
                 break;
             }
             else
@@ -73,11 +96,19 @@ void start_shell()
             if (status == -1)
             {
                 printf("Fail to insert.\n");
+                free(bufBoot);
+                free(bufLoader);
+                bufBoot = NULL;
+                bufLoader = NULL;
                 break;
             }
             else
             {    
-                printf("Success to insert.\n");          
+                printf("Success to insert.\n");
+                free(bufBoot);
+                free(bufLoader);
+                bufBoot = NULL;
+                bufLoader = NULL;      
                 break;
             }
         }
@@ -85,17 +116,21 @@ void start_shell()
         {
             fflush(stdin);
             int nameLen;
-            char floppyName[100];
+            char *floppyName = malloc(100);
             printf("Please input the floppy path:\n");
             nameLen = gets_LR(floppyName,100);
             if (nameLen>0)
             {
                 manage_shell(floppyName);
+                free(floppyName);
+                floppyName = NULL;
                 break;
             }
             else
             {
                 printf("Floppy name cant be empty!\n");
+                free(floppyName);
+                floppyName = NULL;
                 break;
             }
         }
@@ -106,6 +141,8 @@ void start_shell()
             break;
         }
     }
+        free(bufIns);
+        bufIns = NULL;
     }
 }
 
@@ -119,6 +156,11 @@ void manage_shell(char *floppy_name)
     else
     {
         FILE *fp = fopen(floppy_name,"rb+");
+        if(fp == NULL)
+        {
+            printf("Fail to open file\n");
+            return;
+        }
 	    fseek(fp, 0, SEEK_END);
 	    int nFileLen = ftell(fp);
         if(nFileLen != FLOPPYBYTE)
@@ -129,7 +171,7 @@ void manage_shell(char *floppy_name)
         while (1)
         {
             printf("(%s)",floppy_name);
-            char Commandbuf[30];
+            char *Commandbuf = malloc(30);
             int Commandlen;
             Commandlen = gets_LR(Commandbuf,30);
             
@@ -158,6 +200,8 @@ void manage_shell(char *floppy_name)
             {
                 printf("No Instruction [%s],type [help] to get assistance.\n",Commandbuf);
             }
+            free(Commandbuf);
+            Commandbuf = NULL;
             
         }
         fclose(fp);
@@ -200,9 +244,12 @@ void command_info(FILE *fp)
 
 void command_ls(FILE *fp)
 {
-    FAT12DIRENTRY fat12dir[224];
+    //FAT12DIRENTRY fat12dir[224];
+    PFAT12DIRENTRY fat12dir = malloc(224*sizeof(FAT12DIRENTRY));
     getDirInfo(fp,fat12dir);
     lsDirInfo(fat12dir);
+    free(fat12dir);
+    fat12dir = NULL;
     return;
 }
 

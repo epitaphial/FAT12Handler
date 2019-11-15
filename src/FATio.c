@@ -1,18 +1,22 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "common.h"
 #include "FATio.h"
 
 int gets_LR(char *buffer,int size)
 {
-    int scanf_count;
-    for (scanf_count = 0; scanf_count < size; scanf_count++)
+    int scanf_count,i;
+    fgets(buffer,size,stdin);
+    for (i = 0; i < size; i++)
     {
-        scanf("%c",buffer+scanf_count);
-        if(*(buffer+scanf_count) == '\n')
+        if(buffer[i] == '\n')
+        {
+            buffer[i] = '\0';
             break;
+        }
     }
-    buffer[scanf_count] = '\0';
+    scanf_count = strlen(buffer);
     return scanf_count;
 }
 

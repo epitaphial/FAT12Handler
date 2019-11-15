@@ -4,6 +4,7 @@
 #include "fileopr.h"
 #include "FATshell.h"
 #include "rootdir.h"
+#include "FATio.h"
 
 int main()
 {
@@ -22,6 +23,11 @@ int main()
     else
         printf("success");  
     */
+
+   //gets_LR test
+   /*char buffer[5];
+   int d = gets_LR(buffer,5);
+   printf("%s,%d",buffer,d);*/
 
     //shell test
     start_shell();
