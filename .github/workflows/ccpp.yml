@@ -17,5 +17,7 @@ jobs:
       run: make
     - name: cd
       run: cd build
+    - name: chmod
+      run: chmod 777 test
     - name: test
       run: ./test
